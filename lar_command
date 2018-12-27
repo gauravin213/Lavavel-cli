@@ -1,0 +1,54 @@
+ubuntu
+
+https://www.howtoforge.com/tutorial/install-laravel-on-ubuntu-for-apache/
+
+install composer
+https://www.1and1.com/cloud-community/learn/application/php/install-and-use-php-composer-on-ubuntu-1604/
+curl -sS https://getcomposer.org/installer | php
+
+
+cd /var/www/html/Laravelgs1
+
+sudo composer
+
+sudo composer create-project laravel/laravel laravelgs --prefer-dist
+
+sudo chgrp -R www-data /var/www/html/Laravelgs1
+
+sudo chmod -R 777 /var/www/html/Laravelgs1/
+
+/**/
+php artisan make:controller Hello
+
+php artisan make:migration create_users_table
+
+php artisan make:controller TicketController
+
+php artisan make:model Ticket
+
+php artisan route:list
+/**/
+
+php artisan make:auth
+
+php artisan migrate
+
+php artisan serve
+
+http://127.0.0.1:8000
+
+
+
+
+
+
+crud
+https://appdividend.com/2017/10/15/laravel-5-5-crud-example-tutorial/
+
+php artisan make:controller TicketController
+
+sudo service apache2 restart
+
+sudo service apache2 stop
+
+sudo service apache2 start
