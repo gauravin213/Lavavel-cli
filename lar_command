@@ -35,7 +35,7 @@ composer install
 php artisan make:migration {CreateTicketsTable}
 OR
 //Add extra field 
-php artisan make:migration add_extra_field_to_users_table --table=users
+php artisan make:migration add_extra_field_to_employees_table --table=employees
 
 php artisan make:controller TicketController
 
@@ -133,6 +133,10 @@ http://techiescircle.com/add-extra-fields-laravel-5-registration-form/
 https://medium.com/@hujjatnazari/the-easiest-way-to-create-acl-for-laravel-projects-1bafe371e7e1
 
 
+//Install admin LTE theme
+https://adminlte.io/blog/integrate-adminlte-with-laravel
+
+
 
 https://www.studentstutorial.com/laravel/hello-world
 
@@ -156,3 +160,63 @@ php artisan make:provider          Create a new service provider class
 php artisan make:request           Create a new form request class
 php artisan make:seeder            Create a new seeder class
 php artisan make:test              Create a new test class
+
+
+
+
+
+Laravel 5.5
+
+1. Go to root folder 
+2. Create two files backend.php and frontend.php
+3. Open app/provider/RouteServiceProvider.php
+4. Go to function mapWebRoutes()
+5. Then write some code
+		Route::middleware('web')
+             ->namespace('App\Http\Controllers\Backend')
+             ->prefix('admin')
+             ->group(base_path('routes/backend.php'));
+
+        Route::middleware('web')
+             ->namespace('App\Http\Controllers\Frontend')
+             ->group(base_path('routes/frontend.php'));
+
+
+6. Now open backend.php and add root
+Route::get('/backtest', 'BackController@index');
+
+Now open frontend.php and add root
+Route::get('/', 'FrontController@index');
+Route::get('/fronttest', 'FrontController@index');
+
+
+7. Create and open backend controller
+php artisan make:controller Backend/BackController
+php artisan make:controller Frontend/FrontController
+8. Create and open resouse
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+https://github.com/hoadv/employee-mgmt-laravel5.4-adminlte
+composer update
+rename .env.example with .env
+configure database on .env file
+create a new database with name employees_db
+create new tables with: php artisan migrate
+create default user for system with: php artisan db:seed
+php artisan key:generate
+Execute: php artisan config:clear
+Execute: php artisan serve
+default usename: admin@gmail.com/admin
+http://127.0.0.1:8000
