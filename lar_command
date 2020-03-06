@@ -13,6 +13,8 @@ sudo composer
 
 //Install laravel via composer
 sudo composer create-project laravel/laravel laravelgs --prefer-dist
+or
+sudo composer create-project --prefer-dist laravel/laravel laravelblog "5.5.*"
 
 sudo chmod -R 777 /var/www/html/laravelgs/
 
@@ -37,11 +39,21 @@ OR
 //Add extra field 
 php artisan make:migration add_extra_field_to_employees_table --table=employees
 
+php artisan make:migration add_extra_field_to_posts_table --table=posts
+
 php artisan make:controller TicketController
 
 php artisan make:model Ticket 
 or 
 php artisan make:model Member -c
+
+
+
+php artisan make:seeder UsersTableSeeder
+php artisan db:seed --class=UsersTableSeeder
+php artisan db:seed
+
+
 
 php artisan make:auth
 
@@ -49,9 +61,17 @@ php artisan migrate
 
 php artisan route:list
 
+php artisan serve
+
+php artisan key:generate
 
 
-php artisan make:controller CustomersController --model=Customer
+php artisan make:migration Create Categories Table
+
+php artisan make:model CategoryRelationship -mcr
+
+
+php artisan make:controller UserController --model=User
 
 php artisan make:model Todo -mcr
 -m, --migration Create a new migration file for the model.
@@ -126,6 +146,7 @@ Now it working..
 
 //Add extra field in registration form
 http://techiescircle.com/add-extra-fields-laravel-5-registration-form/
+php artisan make:migration add_extra_field_to_users_table --table=users
 
 
 
@@ -140,8 +161,46 @@ https://adminlte.io/blog/integrate-adminlte-with-laravel
 
 https://www.studentstutorial.com/laravel/hello-world
 
+/*
+* Add helper
+*/
+// Code within app\Helpers\Helper.php
 
+namespace App\Helpers;
 
+class Helper
+{
+    public static function shout(string $string)
+    {
+        return strtoupper($string);
+    }
+}
+--
+// Code within config/app.php
+
+    'aliases' => [
+     ...
+        'Helper' => App\Helpers\Helper::class,
+
+---
+// Code within app/Http/Controllers/SomeController.php
+
+namespace App\Http\Controllers;
+
+use Helper;
+
+class SomeController extends Controller
+{
+
+    public function __construct()
+    {
+        Helper::shout('now i\'m using my helper class in a controller!!');
+    }
+
+}
+/*
+* Add helper
+*/
 
 
 php artisan make:auth              Scaffold basic login and registration views and routes
@@ -220,3 +279,50 @@ Execute: php artisan config:clear
 Execute: php artisan serve
 default usename: admin@gmail.com/admin
 http://127.0.0.1:8000
+
+
+
+
+
+
+
+
+$table->string('cs_basic_salary');
+$table->string('cs_increament');
+$table->string('cs_grad_pay');
+$table->string('cs_band');
+
+
+
+
+Route::get('/devtest', 'BlogController@devtest');
+
+
+ public function devtest(Request $request)
+    {
+        
+        $id  = $request->get('id');
+
+        $search  = $request->get('search');
+
+
+        if (!empty($id)) {
+            $blog = DB::table('blogs')->where('id', $id)->paginate(15);
+        }else{
+            $blog = DB::table('blogs')->where('title', 'like', '%'.$search.'%')->paginate(3);
+        }
+
+        return view('blog.index',compact('blog'))
+            ->with('i', (request()->input('page', 1) - 1) * 5);
+    }
+
+
+
+
+
+return view('blog.show',compact('blog'));
+
+
+{{ route('blog.show',$member->id) }}
+
+
