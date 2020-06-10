@@ -15,6 +15,7 @@ sudo composer
 sudo composer create-project laravel/laravel laravelgs --prefer-dist
 or
 sudo composer create-project --prefer-dist laravel/laravel laravelblog "5.5.*"
+composer create-project --prefer-dist laravel/laravel laraveljwt "5.8.*"
 
 sudo chmod -R 777 /var/www/html/laravelgs/
 
@@ -31,6 +32,9 @@ composer install
 
 
 
+https://stackoverflow.com/questions/43565877/no-access-control-allow-origin-header-laravel/52399362#52399362
+
+
 /*
 * Laravel command
 */
@@ -41,7 +45,7 @@ php artisan make:migration add_extra_field_to_employees_table --table=employees
 
 php artisan make:migration add_extra_field_to_posts_table --table=posts
 
-php artisan make:controller TicketController
+php artisan make:controller API/UserController
 
 php artisan make:model Ticket 
 or 
@@ -53,6 +57,7 @@ php artisan make:seeder UsersTableSeeder
 php artisan db:seed --class=UsersTableSeeder
 php artisan db:seed
 
+php artisan make:migration --table=users adds_api_token_to_users_table
 
 
 php artisan make:auth
@@ -326,3 +331,27 @@ return view('blog.show',compact('blog'));
 {{ route('blog.show',$member->id) }}
 
 
+
+
+
+API: https://www.toptal.com/laravel/restful-laravel-api-tutorial
+
+http://127.0.0.1:8000/api/posts
+
+
+
+//Solved cors issue
+https://medium.com/@petehouston/allow-cors-in-laravel-2b574c51d0c1
+
+
+//Passposr api authentication
+composer require paragonie/random_compat:2.*
+composer require laravel/passport "4.0.*"
+
+composer require paragonie/random_compat:2.*
+composer require laravel/passport=~7.0
+
+
+//Install jwt packeg for token validation
+https://jwt-auth.readthedocs.io/en/develop/laravel-installation/
+https://blog.pusher.com/laravel-jwt/
