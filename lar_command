@@ -59,6 +59,11 @@ php artisan db:seed
 
 php artisan make:migration --table=users adds_api_token_to_users_table
 
+For Laravel >=6
+composer require laravel/ui
+php artisan ui vue --auth
+php artisan migrate
+
 
 php artisan make:auth
 
