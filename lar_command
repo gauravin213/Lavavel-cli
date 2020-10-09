@@ -63,6 +63,8 @@ For Laravel >=6
 composer require laravel/ui
 php artisan ui vue --auth
 php artisan migrate
+npm install
+npm run dev
 
 
 php artisan make:auth
