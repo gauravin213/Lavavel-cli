@@ -65,6 +65,8 @@ php artisan ui vue --auth
 php artisan migrate
 npm install
 npm run dev
+php artisan cache:clear
+php artisan view:clear
 
 
 php artisan make:auth
